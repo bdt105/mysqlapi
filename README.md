@@ -26,10 +26,11 @@ private $defaultSelect = "*";
 
 ### sql
 
-url: /sql
-mehtod: POST
-body: 
+- url: /sql
+- mehtod: POST
+- body:
+```json
 {
   "sql": "Any valid sql query will be executed"
 }
-
+```
