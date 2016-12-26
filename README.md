@@ -5,7 +5,7 @@ How to connect to your MySql database through REST API.
 
 ## Pre requists ##
 
-You simply need a functionnal PH server 5.5 minimum.
+You simply need a functionnal PHP server 5.5 minimum.
 
 The API uses msqli library to connect to MySql.
 
