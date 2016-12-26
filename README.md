@@ -11,7 +11,7 @@ The API uses msqli library to connect to MySql
 
 ## Database configuration
 
-Simply change the very beggining of class.ApiDatabse.php file
+Simply change the very beggining of class.ApiDatabse.php file with your own connexion data.
 
 private $host = "databaseserver:serverport";
 
@@ -26,3 +26,10 @@ private $defaultLimit = 100;
 private $defaultOffset = 0;
 
 private $defaultSelect = "*";
+
+## Feature
+
+### sql
+
+**POST** /sql, post body must be {"sql": ""}. Any valid sql query will be executed.
+
