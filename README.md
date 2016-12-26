@@ -65,3 +65,14 @@ Any API will return the same json object. Results array contains rows field by f
 - method: GET
 - return: json object containg the description of the field of the table according to __SHOW FIELDS FROM tablename__
 
+### count
+
+- url: /count/tablename
+- method: GET, POST
+- body:
+```json
+{
+    "__where": "Any valid WHERE sql expression"
+}
+```
+- return: json object containg the description of the field of the table according to __SELECT count(\*) FROM tablename WHERE \_\_where __
