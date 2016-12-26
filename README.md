@@ -58,6 +58,7 @@ Any API will return the same json object. Results array contains rows field by f
 
 ### sql
 
+- description: executes a sql expression and returns its results.
 - url: /sql
 - mehtod: POST
 - body:
@@ -70,12 +71,14 @@ Any API will return the same json object. Results array contains rows field by f
 
 ### fields
 
+- description: returns the fields and properties of a table *tablename*
 - url: /fields/tablename
 - method: GET
 - return: json object containg the description of the field of the table according to "SHOW FIELDS FROM tablename"
 
 ### count
 
+- description: returns the number of rows a table *tablename*.
 - url: /count/tablename
 - method: GET, POST
 - body:
@@ -88,6 +91,7 @@ Any API will return the same json object. Results array contains rows field by f
 
 ### read
 
+- description: returns the rows of a table *tablename*.
 - url: /read/tablename
 - method: GET, POST
 - body:
@@ -103,6 +107,7 @@ Any API will return the same json object. Results array contains rows field by f
 
 ### insert
 
+- description: inserts rows into a table *tablename*.
 - url: /insert/tablename
 - method: POST
 - body:
@@ -124,30 +129,50 @@ Any API will return the same json object. Results array contains rows field by f
 
 ### update
 
+- description: updates rows of a table *tablename* according to a condition.
 - url: /insert/tablename
 - method: POST
 - body:
 ```json
 [
     {
-        "fieldid": "",
-        "field1": "",
-        "field2": "",
+        "fieldid": "new value",
+        "field1": "new value",
+        "field2": "new value",
         "__where": ""
     },
     {
-        "fieldid": "",
-        "field1": "",
-        "field2": "",
+        "fieldid": "new value",
+        "field1": "new value",
+        "field2": "new value",
         "__where": ""
     }
 ]
 ```
 - return: json object containg the result of "UPDATE" query according to \_\_where condition.
 
-
 ### delete
 
+
+- description: deletes some rows of a table *tablename* according to a condition.
+- url: /insert/tablename
+- method: POST
+- body:
+```json
+[
+    {
+        "__where": ""
+    },
+    {
+        "__where": ""
+    }
+]
+```
+- return: json object containg the result of "DELETE" query according to \_\_where condition.
+
+### fresh
+
+- description: returns an empty row of a table *tablename*.
 - url: /insert/tablename
 - method: POST
 - body:
