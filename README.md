@@ -130,7 +130,7 @@ Any API will return the same json object. Results array contains rows field by f
 ### update
 
 - description: updates rows of a table *tablename* according to a condition.
-- url: /insert/tablename
+- url: /update/tablename
 - method: POST
 - body:
 ```json
@@ -155,7 +155,7 @@ Any API will return the same json object. Results array contains rows field by f
 
 
 - description: deletes some rows of a table *tablename* according to a condition.
-- url: /insert/tablename
+- url: /delete/tablename
 - method: POST
 - body:
 ```json
@@ -173,7 +173,7 @@ Any API will return the same json object. Results array contains rows field by f
 ### fresh
 
 - description: returns an empty row of a table *tablename*.
-- url: /insert/tablename
+- url: /fresh/tablename
 - method: POST
 - body:
 ```json
