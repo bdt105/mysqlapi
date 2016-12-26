@@ -9,7 +9,7 @@ You simply need a functionnal PHP server 5.5 minimum.
 
 The API uses msqli library to connect to MySql.
 
-All api return are json objects. There for the database must be in **utf8 format only**.
+All api returns are json objects. Therefors the database must be **utf8 encoded only**.
 
 Don't forget to set your .htaccess file so http://serveur:port/apiurl/xxx works properly (for instance):
 ```php
