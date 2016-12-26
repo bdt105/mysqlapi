@@ -15,17 +15,11 @@ Simply change the very beggining of class.ApiDatabse.php file with your own conn
 
 ```php
 private $host = "databaseserver:serverport";
-
 private $user = "user";
-
 private $password = "password";
-
 private $database = "database";
-
 private $defaultLimit = 100;
-
 private $defaultOffset = 0;
-
 private $defaultSelect = "*";
 ```
 ## Feature
