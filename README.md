@@ -36,16 +36,16 @@ private $defaultSelect = "*";
     "sql": "Any valid sql query will be executed"
 }
 ```
-- return: json object
+- return: json object, results contains rows, field by field according to the sql pharse
 ```json
 {
-    "sql": "", /* sql phrase sent */
-    "returnCode": 200, // return code (http standard)
-    "insertedId": 0, // last inserted id when INSERT is used
-    "resultCount": 12, // count of the result
-    "sqlError": "", // sql error if any
-    "affectedRows": 12, // number of changed rows when UPDATE is used
-    "results": [ // json objects describing the database rows
+    "sql": "sql phrase sent",
+    "returnCode": "return code (http standards)"
+    "insertedId": "last inserted id when INSERT is used"
+    "resultCount": "count of the result"
+    "sqlError": "sql error if any"
+    "affectedRows": "number of changed rows when UPDATE is used"
+    "results": [
         {
             "fieldid": "",
             "field1": "",
