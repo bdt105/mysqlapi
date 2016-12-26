@@ -39,7 +39,7 @@ private $defaultSelect = "*";
 - return: json object
 ```json
 {
-    "sql": "", // sql phrase sent
+    "sql": "", /* sql phrase sent */
     "returnCode": 200, // return code (http standard)
     "insertedId": 0, // last inserted id when INSERT is used
     "resultCount": 12, // count of the result
