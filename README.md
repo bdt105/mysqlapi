@@ -1,5 +1,5 @@
 # mysqlapi
-PHP API for MySql
+PHP API for MySql CRUD (Create, Read, Update, Delete) features.
 
 How to connect to your MySql database through REST API.
 
@@ -91,3 +91,47 @@ Any API will return the same json object. Results array contains rows field by f
 }
 ```
 - return: json object containg the description of the field of the table according to "SELECT \_\_select FROM tablename WHERE \_\_where GROUP BY \_\_groupby ORDER BY \_\_orderby"
+
+### insert
+
+- url: /insert/tablename
+- method: POST
+- body:
+```json
+[
+    {
+        "fieldid": "",
+        "field1": "",
+        "field2": ""
+    },
+    {
+        "fieldid": "",
+        "field1": "",
+        "field2": ""
+    }
+]
+```
+- return: json object containg the result of "UPDATE" query.
+
+### update
+
+- url: /insert/tablename
+- method: POST
+- body:
+```json
+[
+    {
+        "fieldid": "",
+        "field1": "",
+        "field2": "",
+        "__where": ""
+    },
+    {
+        "fieldid": "",
+        "field1": "",
+        "field2": "",
+        "__where": ""
+    }
+]
+```
+- return: json object containg the result of "UPDATE" query according to \_\_where condition.
