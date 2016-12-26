@@ -1,0 +1,163 @@
+/* Messages */
+GET - Recuperation des messages
+/messages?user=XXX&type=YYY
+
+GET - Recuperation d'un message
+/message/XXX
+
+DEL - Suppression d'un message
+/message/XXX
+
+GET - Suppression d'un message
+/message/delete/XXX
+
+PUT - Ajout d'un message
+/message?user=XXX&type=YYY&message=ZZZ
+
+GET - Ajout d'un message
+/message/put?user=XXX&type=YYY&message=ZZZ
+
+POST - Ajout d'un message
+message dans le body du POST
+/message/send?user=XXX&type=YYY
+
+DEL - Suppression de messages
+/messages?user=XXX&type=YYY
+
+GET - QrCode d'un message
+/message/qrcode?id=XXX&size=YYY
+
+GET - QrCode de messages
+/message/qrcode?user=XXX&type=YYY&size=ZZZ
+
+/* Prescriptions */
+POST des prescriptions
+Body
+{
+  "prescription": {
+    "idprescriptions": "5353",
+    "patientId": "487",
+    "user": "bernard.deregnaucourt@vidal.fr",
+    "creationDate": "2015-09-18 11:01:27",
+    "userId": null
+  },
+  "patient": {
+    "idpatient": "487",
+    "dateOfBirth": "2001-10-26 01:01:01",
+    "gender": "MALE",
+    "weight": "80",
+    "height": "180",
+    "weeksOfAmenorrhea": "-1",
+    "breastFeeding": "NONE",
+    "creatin": "-1",
+    "hepaticInsufficiency": "NONE",
+    "user": "bernard.deregnaucourt@vidal.fr",
+    "name": "patient",
+    "allergyIds": "",
+    "moleculeIds": "",
+    "cim10Ids": "4703",
+    "firstName": "",
+    "record": ""
+  },
+  "prescriptionLines": [
+    {
+      "idprescriptionLines": "1754",
+      "prescriptionId": "5353",
+      "productId": "4004",
+      "productCode": null,
+      "productName": "CLAMOXYL 500 mg gél",
+      "productDetail": "AMOXICILLINE 500 mg gél (CLAMOXYL)",
+      "unitId": "139",
+      "unitName": "gélule",
+      "productType": "0",
+      "durationType": "DAY",
+      "frequencyType": "PER_DAY",
+      "dose": "3.2",
+      "duration": "2",
+      "route": "38",
+      "summary": "3 gélule(s) par jour (orale)  pendant 2 jours",
+      "doseUnit": null,
+      "indicationId": null,
+      "moments": "MORNING;EVENING",
+      "days": "WEDNESDAY;FRIDAY",
+      "onDemand": null,
+      "comment": null,
+      "momentDoses": "1;;;2;1;2" // "MORNING";"LUNCH";"EVENING";"SLEEP";"NIGHT";"OTHER"
+    },
+    {
+      "idprescriptionLines": "1757",
+      "prescriptionId": "5353",
+      "productId": "155491",
+      "productCode": null,
+      "productName": "RENITEC 20 mg cp",
+      "productDetail": "ENALAPRIL MALEATE 20 mg cp (RENITEC)",
+      "unitId": "129",
+      "unitName": "comprimé",
+      "productType": "0",
+      "durationType": "DAY",
+      "frequencyType": "PER_DAY",
+      "dose": "3",
+      "duration": "5",
+      "route": "38",
+      "summary": "3 comprimé(s) par jour (orale)  pendant 5 jours",
+      "doseUnit": null,
+      "indicationId": null,
+      "moments": null,
+      "days": null,
+      "onDemand": null,
+      "comment": null,
+      "momentDoses": "1;;;2;;"
+    },
+    {
+      "idprescriptionLines": "1758",
+      "prescriptionId": "5353",
+      "productId": "4002",
+      "productCode": null,
+      "productName": "CLAMOXYL 1 g cp dispers",
+      "productDetail": "AMOXICILLINE 1 g cp dispers (CLAMOXYL)",
+      "unitId": "129",
+      "unitName": "comprimé",
+      "productType": "0",
+      "durationType": "DAY",
+      "frequencyType": "PER_DAY",
+      "dose": "3",
+      "duration": "2",
+      "route": "38",
+      "summary": "3 comprimé(s) par jour (orale)  pendant 2 jours",
+      "doseUnit": null,
+      "indicationId": null,
+      "moments": "MORNING",
+      "days": null,
+      "onDemand": null,
+      "comment": null,
+      "momentDoses": null
+    }
+  ]
+}  
+
+POST - Crypter une prescription
+/prescription/encrypt
+Body des prescriptions
+
+POST Décrypter une prescription
+/prescription/decrypt
+Body prescription cryptée
+
+POST - Cryptage et Envoyer une prescription
+/prescription/encrypt_send
+Body des prescriptions
+
+/* Administrations */
+POST des administrations
+Body
+{
+    "idprescriptions": "5353",
+    "idprescriptionLines": "487",
+    "quantity": "1.5",
+    "theoreticalQuantity": "2",
+    "unit": "Comprimé",
+    "unitId": "129",
+    "takeDate": "2015-09-18 11:01:27",
+    "user": "abcd",
+    "productName": "CLAMOXYL 1 g cp dispers"
+}
