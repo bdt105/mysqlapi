@@ -63,7 +63,7 @@ Any API will return the same json object. Results array contains rows field by f
 
 - url: /fields/tablename
 - method: GET
-- return: json object containg the description of the field of the table according to __SHOW FIELDS FROM tablename__
+- return: json object containg the description of the field of the table according to "SHOW FIELDS FROM tablename"
 
 ### count
 
@@ -75,4 +75,19 @@ Any API will return the same json object. Results array contains rows field by f
     "__where": "Any valid WHERE sql expression"
 }
 ```
-- return: json object containg the description of the field of the table according to SELECT count(\*) FROM tablename WHERE \_\_where
+- return: json object containg the description of the field of the table according to "SELECT count(\*) FROM tablename WHERE \_\_where"
+
+### read
+
+- url: /read/tablename
+- method: GET, POST
+- body:
+```json
+{
+    "__select": "SELECT expression",
+    "__where": "Any valid WHERE sql expression",
+    "__orderby": "ORDER BY expression",
+    "__groupby": "GROUP BY expression"
+}
+```
+- return: json object containg the description of the field of the table according to "SELECT \_\_select FROM tablename WHERE \_\_where GROUP BY \_\_groupby ORDER BY \_\_orderby"
