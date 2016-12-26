@@ -31,5 +31,10 @@ private $defaultSelect = "*";
 
 ### sql
 
-**POST** /sql, post body must be {"sql": ""}. Any valid sql query will be executed.
+url: /sql
+mehtod: POST
+body: 
+{
+  "sql": "Any valid sql query will be executed"
+}
 
