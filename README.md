@@ -14,15 +14,9 @@ The API uses msqli library to connect to MySql
 Simply change the very beggining of class.ApiDatabse.php file
 
 private $host = "databaseserver:serverport";
-
 private $user = "user";
-
 private $password = "password";
-
 private $database = "database";
-
 private $defaultLimit = 100;
-
 private $defaultOffset = 0;
-
 private $defaultSelect = "*";
