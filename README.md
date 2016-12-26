@@ -11,6 +11,13 @@ The API uses msqli library to connect to MySql.
 
 All api return are json objects. There for the database must be in **utf8 format only**.
 
+Don't forget to set your .htaccess file so http://serveur:port/apiurl/xxx works properly (for instance):
+```php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ api.php?rquest=$1 [QSA,NC,L]
+```
+
 ## Database configuration
 
 Simply change the very beggining of class.ApiDatabse.php file with your own connexion data.
