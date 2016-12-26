@@ -13,6 +13,7 @@ The API uses msqli library to connect to MySql
 
 Simply change the very beggining of class.ApiDatabse.php file with your own connexion data.
 
+```php
 private $host = "databaseserver:serverport";
 
 private $user = "user";
@@ -26,7 +27,7 @@ private $defaultLimit = 100;
 private $defaultOffset = 0;
 
 private $defaultSelect = "*";
-
+```
 ## Feature
 
 ### sql
