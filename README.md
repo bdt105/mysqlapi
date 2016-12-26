@@ -31,6 +31,19 @@ private $defaultSelect = "*";
 - body:
 ```json
 {
-  "sql": "Any valid sql query will be executed"
+    "sql": "Any valid sql query will be executed"
 }
 ```
+- return
+```json
+{
+    "sql": "",
+    "returnCode": 200,
+    "insertedId": 0,
+    "resultCount": 12,
+    "sqlError": "",
+    "affectedRows": 12,
+    "results": [
+    ]
+ }
+ ```
