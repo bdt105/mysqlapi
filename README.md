@@ -41,8 +41,7 @@ Any API will return the same json object. Results array contains rows field by f
         {
             "fieldid": "",
             "field1": "",
-            "field2": "",
-            etc.
+            "field2": ""
         }
     ]
  }
@@ -59,4 +58,8 @@ Any API will return the same json object. Results array contains rows field by f
 }
 ```
 - return: json object
+### fields
+- url: /fields/tablename
+- method: GET
+- return: json object containg the description of the field of the table according to __SHOW FIELDS FROM tablename__
 
