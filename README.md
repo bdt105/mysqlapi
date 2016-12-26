@@ -92,7 +92,7 @@ Any API will return the same json object. Results array contains rows field by f
 ### read
 
 - description: returns the rows of a table *tablename*.
-- url: /read/tablename
+- url: /read/tablename?limit=10&offset=3 (records from 3 to 13), only limit and offset parameter are available in GET method
 - method: GET, POST
 - body:
 ```json
@@ -100,7 +100,9 @@ Any API will return the same json object. Results array contains rows field by f
     "__select": "SELECT expression",
     "__where": "Any valid WHERE sql expression",
     "__orderby": "ORDER BY expression",
-    "__groupby": "GROUP BY expression"
+    "__groupby": "GROUP BY expression",
+    "__limit": "LIMIT expression",
+    "__offset": "OFFSET exporession"
 }
 ```
 - return: json object containg the description of the field of the table according to "SELECT \_\_select FROM tablename WHERE \_\_where GROUP BY \_\_groupby ORDER BY \_\_orderby"
