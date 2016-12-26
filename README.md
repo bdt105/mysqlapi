@@ -75,4 +75,4 @@ Any API will return the same json object. Results array contains rows field by f
     "__where": "Any valid WHERE sql expression"
 }
 ```
-- return: json object containg the description of the field of the table according to __SELECT count(\*) FROM tablename WHERE \_\_where __
+- return: json object containg the description of the field of the table according to SELECT count(\*) FROM tablename WHERE \_\_where
