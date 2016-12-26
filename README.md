@@ -7,7 +7,9 @@ How to connect to your MySql database through REST API.
 
 You simply need a functionnal PH server 5.5 minimum.
 
-The API uses msqli library to connect to MySql
+The API uses msqli library to connect to MySql.
+
+All api return are json objects. There for the database must be in **utf8 format only**.
 
 ## Database configuration
 
@@ -34,16 +36,22 @@ private $defaultSelect = "*";
     "sql": "Any valid sql query will be executed"
 }
 ```
-- return
+- return: json object
 ```json
 {
-    "sql": "",
-    "returnCode": 200,
-    "insertedId": 0,
-    "resultCount": 12,
-    "sqlError": "",
-    "affectedRows": 12,
-    "results": [
+    "sql": "", // sql phrase sent
+    "returnCode": 200, // return code (http standard)
+    "insertedId": 0, // last inserted id when INSERT is used
+    "resultCount": 12, // count of the result
+    "sqlError": "", // sql error if any
+    "affectedRows": 12, // number of changed rows when UPDATE is used
+    "results": [ // json objects describing the database rows
+        {
+            "fieldid": "",
+            "field1": "",
+            "field2": "",
+            etc.
+        }
     ]
  }
  ```
