@@ -41,7 +41,9 @@ Any API will return the same json object. Results array contains rows field by f
         {
             "fieldid": "",
             "field1": "",
-            "field2": ""
+            "field2": "",
+            "__idFieldName", "name of the id (PRIMARY key) field",
+            "idValue": "id of the record (value of __idFieldName"
         }
     ]
  }
