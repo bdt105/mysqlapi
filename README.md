@@ -137,3 +137,21 @@ Any API will return the same json object. Results array contains rows field by f
 ]
 ```
 - return: json object containg the result of "UPDATE" query according to \_\_where condition.
+
+
+### delete
+
+- url: /insert/tablename
+- method: POST
+- body:
+```json
+[
+    {
+        "__where": ""
+    },
+    {
+        "__where": ""
+    }
+]
+```
+- return: json object containg the result of "DELETE" query according to \_\_where condition.
