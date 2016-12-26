@@ -26,25 +26,17 @@ private $defaultSelect = "*";
 ```
 ## Feature
 
-### sql
+### Return object
 
-- url: /sql
-- mehtod: POST
-- body:
-```json
-{
-    "sql": "Any valid sql query will be executed"
-}
-```
-- return: json object, results contains rows, field by field according to the sql pharse
+Any API will return the same json object. Results array contains rows field by field according to the sql pharse.
 ```json
 {
     "sql": "sql phrase sent",
-    "returnCode": "return code (http standards)"
-    "insertedId": "last inserted id when INSERT is used"
-    "resultCount": "count of the result"
-    "sqlError": "sql error if any"
-    "affectedRows": "number of changed rows when UPDATE is used"
+    "returnCode": "return code (http standards)",
+    "insertedId": "last inserted id when INSERT is used",
+    "resultCount": "count of the result",
+    "sqlError": "sql error if any",
+    "affectedRows": "number of changed rows when UPDATE is used",
     "results": [
         {
             "fieldid": "",
@@ -55,3 +47,16 @@ private $defaultSelect = "*";
     ]
  }
  ```
+
+### sql
+
+- url: /sql
+- mehtod: POST
+- body:
+```json
+{
+    "sql": "Any valid sql query will be executed"
+}
+```
+- return: json object
+
