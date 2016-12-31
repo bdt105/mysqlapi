@@ -11,7 +11,7 @@ The API uses msqli library to connect to MySql.
 
 All api returns are json objects. Therefors the database must be **utf8 encoded only**.
 
-Don't forget to set your .htaccess file so http://serveur:port/apiurl/xxx works properly (for instance):
+Don't forget to set your .htaccess file so http://serveur:port/apiurl/database/xxx works properly (for instance):
 ```php
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -20,17 +20,22 @@ RewriteRule ^(.*)$ api.php?rquest=$1 [QSA,NC,L]
 
 ## Database configuration
 
-Simply change the very beggining of class.ApiDatabse.php file with your own connexion data.
+Create a JSON file containing your configuration (see example demonstration.json). The name of that file will be the name of the database you'll be referring to in your http calls.
 
-```php
-private $host = "databaseserver:serverport";
-private $user = "user";
-private $password = "password";
-private $database = "database";
-private $defaultLimit = 100;
-private $defaultOffset = 0;
-private $defaultSelect = "*";
+```json
+{
+    "host": "server:port",
+    "user": "user",
+    "password": "password",
+    "database": "databsename"
+}
+
 ```
+The url of your API will then be 
+```
+http://serveur:port/apiurl/jsonfilename/xxx
+```
+
 ## Feature
 
 ### Return object
