@@ -58,17 +58,26 @@
             $this->inputs();
 	}
         
+        protected function jsonEncode($data){
+            return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        }
+
+        protected function jsonDecode($data){
+            return json_decode($data);
+        }
+    
+        
 	public function getReferer() {
             return $_SERVER['HTTP_REFERER'];
 	}
         
 	public function response($data, $status) {
             if ($data == ''){
-                $data = $this->statusList[$status];
+                $data = array("status" => $status, "message" => $this->statusList[$status]);
             }
             $this->_code = ($status) ? $status : 200;
             $this->setHeaders();
-            echo $data;
+            echo $this->jsonEncode($data);
             exit;
 	}
 
@@ -137,31 +146,6 @@
             return $_GET;
         }
             
-        public function processApi()
-        {    
-            if ($_SERVER['HTTP_HOST'] !== 'localhost' && $_SERVER['HTTP_HOST'] !== '127.0.0.1'){
-                $this->response('', 403);
-                return;
-            }
-            $req = $_REQUEST['rquest'];
-            $pos = strpos($req, '/');
-            $param = '';
-            if ($pos === false){
-                $func = $req;
-            }else{
-                $func = strstr($req, '/', true);
-                $param = strstr($req, '/');
-            }
-            if ((int)method_exists($this, $func) > 0){
-                $this->$func($param);
-            } else{
-                if (isset($this->_defaultFunction) && ((int)method_exists($this, $this->_defaultFunction) > 0)){
-                    $f = $this->_defaultFunction;
-                    $this->$f($func);
-                }else{
-                    $this->response('', 400); 
-                }
-            }
-        }
+        
     }	
 ?>

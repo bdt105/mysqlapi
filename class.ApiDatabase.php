@@ -6,10 +6,10 @@ class ApiDatabase extends ApiRest{
     
     private $mysqli;
     
-    private $host = "localhost:3311";
-    private $user = "admin";
-    private $password = "adm";
-    private $database = "demonstration";
+    private $host = null;
+    private $user = null;
+    private $password = null;
+    private $database = null;
     private $defaultLimit = 100;
     private $defaultOffset = 0;
     private $defaultSelect = "*";
@@ -17,20 +17,81 @@ class ApiDatabase extends ApiRest{
     public function __construct()
     {
         parent::__construct();
+        $this->connect($this->host, $this->user, $this->password, $this->database);
+    }
+    
+    public function processApi()
+    {    
+        $req = $_REQUEST['rquest'];
+        
+        $url = explode('/', $req);
+        
+        if (count($url) < 2){
+            $this->response('', 400); 
+        }
+        $database = $url[0];
+        $func = $url[1];
+        if (count($url)>2){
+        $param = $url[2];
+        }else{
+            $param = "";
+        }
+        
+        if (!$this->loadDatabaseConfiguration($database)){
+            $this->returnResult(null, "500", $this->mysqli->connect_errno." - ".$this->mysqli->connect_error);
+        }else{
+            if (!$this->grant()){
+                $this->response('', 403);
+                return;                
+            }
+
+            if ((int)method_exists($this, $func) > 0){
+                $this->$func($param);
+            } else{
+                if (isset($this->_defaultFunction) && ((int)method_exists($this, $this->_defaultFunction) > 0)){
+                    $f = $this->_defaultFunction;
+                    $this->$f($func);
+                    $_SESSION['lastRequest'] = $req;
+                }else{
+                    $this->response('', 400); 
+                }
+            }
+        }
+    }
+
+    
+    private function loadDatabaseConfiguration($database){
+        $config = file_get_contents($database.".json");
+        $conf = $this->jsonDecode($config);
+        $this->host = $conf->host;
+        $this->user = $conf->user;
+        $this->password = $conf->password;
+        $this->database = $database;
+        return $this->connect();
+    }
+    
+    private function connect(){
         $this->mysqli = new mysqli($this->host, $this->user, $this->password, $this->database);
         if ($this->mysqli->connect_errno) {
-            $this->returnResult(null, "500", $this->mysqli->connect_errno." - ".$this->mysqli->connect_error);
+            return false;
         }
         $this->mysqli->set_charset("utf8");
-        $this->_defaultFunction = "read";
+        $this->_defaultFunction = "read"; 
+        return true;
     }
     
-    private function jsonEncode($data){
-        return json_encode($data, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-    }
+    public function allowUser($user, $password){  
+        $sql = "SELECT count(*) count FROM user WHERE email='".$user."' AND password='".$password."'";
+        $ret = $this->getArray($sql);
+        
+        return $ret[0]["count"] > 0;
+    }  
     
-    private function jsonDecode($data){
-        return json_decode($data);
+    public function grant(){
+        if (isset($_SERVER['PHP_AUTH_USER'])){
+            return $this->allowUser($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);              
+        }       
+        return false;
     }
     
     private function extractString($text, $from, $to, $caseSensistive = false){
@@ -58,6 +119,9 @@ class ApiDatabase extends ApiRest{
             }
             if (strpos($ret, "OFFSET")){
                 $ret = trim($this->extractString($sql, "FROM", "OFFSET"));
+            }
+            if (strpos($ret, "GROUP")){
+                $ret = trim($this->extractString($sql, "FROM", "GROUP"));
             }
         }
         return $ret;
@@ -130,9 +194,8 @@ class ApiDatabase extends ApiRest{
                 $ret["results"] = null;
                 $ret["error"] = "Too many lines to return, reduce the limit parameter or Json encoding problems (see jsonError)";
                 $ret["jsonError"] = json_last_error_msg();
-                $json = $this->jsonEncode($ret);
             }
-            $this->response($json, $returnCode);
+            $this->response($ret, $returnCode);
         }
         return $ret;
     }
@@ -161,7 +224,8 @@ class ApiDatabase extends ApiRest{
             $orderby = (isset($body->__orderby)  && $body->__orderby != "" ? " ORDER BY ".$body->__orderby : "");
             $offset = (isset($body->__offset) && $body->__offset != "" ? " OFFSET ".$body->__offset : " OFFSET ".$this->defaultOffset);
             $limit = (isset($body->__limit) && $body->__limit != "" ? " LIMIT ".$body->__limit : " LIMIT ".$this->defaultLimit);
-            $sql = " ".$where.(!$whereOnly ? $orderby.$limit.$offset : "");
+            $groupby = (isset($body->__groupby) && $body->__groupby != "" ? " GROUP BY ".$body->__groupby : "");
+            $sql = " ".$where.(!$whereOnly ? $groupby.$orderby.$limit.$offset : "");
         }else{
             if ($this->getRequestMethod() == "GET"){
                 $offset = (isset($_GET["offset"]) ? $_GET["offset"] : $this->defaultOffset) ;
@@ -320,6 +384,7 @@ class ApiDatabase extends ApiRest{
         }else{
             $this->response(null, 400, null);
         }   
+
     }
         
     public function fields($param){
@@ -339,5 +404,12 @@ class ApiDatabase extends ApiRest{
             $this->response(null, 400, null);
         }   
     }
+    public function server($param){
+        $this->returnResult("", 200, $_SERVER);
+    }
     
+    public function request($param){
+        $this->returnResult("", 200, $_REQUEST);
+    } 
+      
 }
