@@ -17,7 +17,7 @@ class ApiDatabase extends ApiRest{
     public function __construct()
     {
         parent::__construct();
-        $this->connect($this->host, $this->user, $this->password, $this->database);
+        //$this->connect($this->host, $this->user, $this->password, $this->database);
     }
     
     public function processApi()
